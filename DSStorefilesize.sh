@@ -13,7 +13,17 @@ while IFS= read -r line; do
 	numfiles=$(expr 1 \+ $numfiles)
 done < "$file2"
 
-rm $file
-rm $file2
 echo $numfiles" DS_Store files were found in "$dir
 echo "They add up to "$sum"K in size"
+
+echo "\nWould you like to see where they are?"
+printf "[y/n]: "
+read input
+
+if [ "$input" == "y" ] 
+then
+	cat $file
+fi
+
+rm $file
+rm $file2
