@@ -12,8 +12,8 @@ cat $file2 > $file
 while IFS= read -r line; do
 	sum=$(expr $(expr 0 \+ $sum) \+ $(echo $line | xargs -I{} expr 0 \+ {}))
 	numfiles=$(expr 1 \+ $numfiles)
-	#echo $line
 done < "$file"
+
 rm $file
 rm $file2
 echo $numfiles" DS_Store files were found in "$dir
