@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 export dir="`dirname ~`/`whoami`"
 export sum=0
 export numfiles=0
-export file=".temp-dsstore.txt"
+export file1=".temp-dsstore.txt"
 export file2=".temp-dsstore2.txt"
 
-find $dir -type f -name ".DS_Store" -exec du -k {} \; > $file
-cat $file | sed -e "s/\([0-9]*\).*$/\1/g" > $file2
+find $dir -type f -name ".DS_Store" -exec du -k {} \; > $file1
+cat $file1 | sed -e "s/\([0-9]*\).*$/\1/g" > $file2
 
 while IFS= read -r line; do
 	sum=$(expr $(expr 0 \+ $sum) \+ $(echo $line | xargs -I{} expr 0 \+ {}))
@@ -17,6 +17,8 @@ echo $numfiles" DS_Store files were found in "$dir
 
 if [[ $numfiles == 0 ]]
 then
+	rm $file1
+	rm $file2
 	exit 1
 fi
 
@@ -29,7 +31,7 @@ read input
 
 if [ "$input" == "y" ] 
 then
-	cat $file
+	cat $file1
 	if [[ "$OSTYPE" == "linux-gnu" ]]
 	then
 		echo ""
@@ -44,6 +46,5 @@ then
 	fi
 fi
 
-
-rm $file
+rm $file1
 rm $file2
