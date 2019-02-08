@@ -26,7 +26,7 @@ echo "They add up to "$sum"K in size"
 
 echo ""
 echo "Would you like to see where they are?"
-printf "[y/n]: "
+printf "[y/N]: "
 read input
 
 if [ "$input" == "y" ] 
